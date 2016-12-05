@@ -1,0 +1,21 @@
+@tag "elm"
+@description "Add a subscription to the subscriptions function"
+editor AddSubscription
+
+param subscription: .*
+
+with file
+  with elm.module when name = "Main" begin
+    do eval { print ("Adding this subscription: " + subscription) }
+    with function f when name = "subscriptions" and { -1 === f.body().indexOf(subscription) }
+      do replaceBody {
+        if (f.body().trim() === "Sub.none") {
+          print ("Replacing body with this subscription: " + subscription) 
+          return subscription;
+        }
+        if (0 === f.body().indexOf("Sub.batch")) {
+          return f.body().replace("]", ", " + subscription + " ]");
+        }
+        return "Sub.batch [ " + subscription + ", " + f.body() + " ]";
+      }
+  end

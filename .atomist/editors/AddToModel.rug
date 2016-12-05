@@ -1,0 +1,91 @@
+@tag "elm"
+@description "Adds a field to the model of an Elm program"
+editor AddToModel
+
+@displayName "Field Name"
+@maxLength 21
+@description "Name of the new model field"
+param field_name: [a-z][\w]*
+
+
+@displayName "Field Type"
+@description "Type of the new field"
+@validInput "An Elm type"
+param field_type: .*
+
+@description "Initial value of the field"
+@displayName "Initial Value"
+@validInput "If this is a string, please include quotes"
+param initial_value: .*
+
+AddToRecordTypeAlias type_name="Model", module="Main"
+AddToModelInitialization module="Main", field_value=initial_value
+
+
+@description "Add a field to a record type alias"
+editor AddToRecordTypeAlias
+
+  @description "Where is this type alias"
+  @displayName "Module Name"
+  param module: .*
+
+  @description "Name of the type alias to change"
+  @displayName "Type alias Name"
+  param type_name: [a-z][\w]*
+
+  @displayName "Field Name"
+  @description "Name of the new model field"
+  param field_name: [a-z][\w]*
+
+
+  @displayName "Field Type"
+  @description "Type of the new field"
+  @validInput "An Elm type"
+  param field_type: .*
+
+with file
+  with elm.module when name = module
+    with type.alias when name = type_name
+      with recordType r when { -1 === r.childrenNames().indexOf(field_name) }
+        do add field_name field_type
+
+@description "Add a field to a record value"
+editor AddToModelInitialization
+
+  @description "Elm module to modify"
+  @displayName "Module Name"
+  param module: .*
+
+  @displayName "Field Name"
+  @description "Name of the new model field"
+  param field_name: [a-z][\w]*
+
+
+  @displayName "Field Value"
+  @description "Populate the new field"
+  @validInput "An Elm expression"
+  param field_value: .*
+
+  @description "If it is a string we will make sure the value is quoted"
+  param field_type: .*
+
+  let field_value_careful = {
+    var quoted = /^".*"$/
+    if (field_type == "String") {
+      if (quoted.test(field_value)) {
+        return field_value;
+      } else {
+        return '"' + field_value + '"';
+      }
+    } else
+    return field_value;
+  }
+
+
+  with file
+    with elm.module when name = module
+      with function f when { f.name() == "init" || f.name() == "model"} begin
+        with recordValue r when { -1 === r.childrenNames().indexOf(field_name) } begin
+          do add field_name field_value_careful
+        end
+      end

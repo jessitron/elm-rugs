@@ -1,0 +1,24 @@
+{
+    "group": "jessitron",
+    "name": "elm-template",
+    "version": "1.0.3",
+    "description": "Elm Editors for use with Atomist Rug",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jessitron/elm-template.git"
+    },
+    "keywords": [
+        "Atomist",
+        "Rug",
+        "Elm"
+    ],
+    "author": "Jessica Kerr",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/jessitron/elm-template/issues"
+    },
+    "homepage": "https://github.com/jessitron/elm-template#readme",
+    "dependencies": {
+        "@atomist/rug": "0.4.2"
+    }
+}

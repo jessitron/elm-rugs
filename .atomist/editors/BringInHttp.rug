@@ -1,0 +1,26 @@
+@tag "elm"
+@description "Bring elm-http into a Program, providing a fetch function"
+editor BringInHttp
+
+@optional
+@default "String"
+param type_to_fetch: .*
+
+let success_constructor={ "FetchSuccess " + type_to_fetch }
+let lowercase_type_to_fetch={ type_to_fetch.charAt(0).toLowerCase() + type_to_fetch.slice(1) }
+let success_deconstructor={ "FetchSuccess " + lowercase_type_to_fetch }
+
+AddDependency dependency_name="evancz/elm-http", dependency_version="3.0.1 <= v < 4.0.0"
+
+AddImport module="Main", module_to_import="Http"
+AddImport module="Main", module_to_import="Task"
+AddImport module="Main", module_to_import="Json.Decode"
+
+AddMessage constructor=success_constructor, deconstructor=success_deconstructor, update_model="model"
+AddMessage constructor="FetchFail Http.Error", deconstructor="FetchFail error", update_model="model"
+
+AddFunction module="Main", code={
+  return "fetch : Json.Decode.Decoder " + type_to_fetch + " -> String -> Cmd Msg" + "\n" +
+         "fetch decoder url =" + "\n" +
+         "    Task.perform FetchFail FetchSuccess (Http.get decoder url)"
+}

@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -e
+#
+# Release: push the build output to a gh-pages branch.
+#
+
+message=$1
+
+# precondition: on master
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+if [ $current_branch != "master" ] ; then
+  echo "You need to be on master in order to release."
+  exit 1
+fi
+
+# precondition: clean `git status`
+uncomitted_changes=$(git status --porcelain)
+if [ -n "$uncomitted_changes" ] ; then
+  echo "You have uncommitted changes. Please stash them or something"
+  exit 1
+fi
+
+# precondition: gh-pages exists (create if not)
+set +e
+git rev-parse --verify gh-pages 2>&1 > /dev/null
+gh_pages_check=$?
+set -e
+if [ $gh_pages_check -ne 0 ]; then
+  git checkout -b gh-pages
+  git push --set-upstream origin gh-pages
+fi
+
+# go to branch of publishment
+git checkout gh-pages
+
+# pull in relevant bits from master
+git checkout master src
+git checkout master resources
+git checkout master build
+
+# build
+./build
+
+# bring output to root
+cp target/* .
+
+# assert: that made a difference (warning only)
+changes=$(git status --porcelain)
+if [ -z "$changes" ] ; then
+  echo "Nothing changed, this is a boring release yo"
+fi
+
+# commit everything, this is fine
+git add .
+git commit -m "Release $message" --allow-empty
+git push
+
+git checkout master

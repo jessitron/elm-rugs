@@ -1,0 +1,16 @@
+@tag "elm"
+@description "add a whole declaration"
+editor AddFunction
+
+  @description "Where does this belong"
+  @displayName "Module Name"
+  param module: [A-Z][\w]*
+
+  @displayName "Code"
+  @description "All the code to add"
+  @validInput "An Elm declaration"
+  param code: .*
+
+  with file f when { -1 == f.content().indexOf(code) }
+    with elm.module when name = module
+      do addFunction code

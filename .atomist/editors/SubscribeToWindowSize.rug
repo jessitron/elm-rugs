@@ -1,0 +1,37 @@
+@tag "elm"
+@description "Learn about the window size"
+editor SubscribeToWindowSize
+
+@optional
+@default "SomeError"
+param errorMsg: .*
+
+Subscribe library_name="elm-lang/window",
+          library_version="1.0.0 <= v < 2.0.0",
+          namespace="Window",
+          name_of_subscription="resizes",
+          message="WindowSize",
+          name_of_content="windowSize",
+          type_of_content="Window.Size"
+
+# Fetch the window size at the beginning
+AddImport module="Main", module_to_import="Task"
+AddMessage constructor="SomeError String",
+           deconstructor="SomeError err",
+           update_model="model"
+AddInitialCommand command="Task.perform SomeError WindowSize Window.size"
+
+
+editor AddInitialCommand
+
+param command: .*
+# TODO: I am assuming the list of commands is currently empty. Will overwrite any existing.
+with file f
+  with elm.module when name = "Main"
+    with function f when name = "init"
+      do replaceBody {
+         var currentBody = f.body();
+         var beforeBang = currentBody.substr(0, currentBody.indexOf("!"));
+         var newCommands = '[ ' + command + ' ]';
+         return beforeBang + "! " + newCommands;
+       }

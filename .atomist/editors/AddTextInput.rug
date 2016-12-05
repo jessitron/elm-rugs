@@ -1,0 +1,35 @@
+@tag "elm"
+@description "Adds a text input to an Elm program "
+editor AddTextInput
+
+@displayName "Name"
+@description "Name of the text input (the field to store in the model)"
+@validInput "An elm identifier"
+param input_name: [a-z][\w]*
+
+# capitalize
+let type_name_foo={ input_name.charAt(0).toUpperCase() + input_name.slice(1) }
+let function_body={
+  return (
+   "_INPUT_NAME_Input : Model -> Html Msg\n" +
+   "_INPUT_NAME_Input model =\n" +
+   "    Html.input\n" +
+   "        [ Html.Attributes.id \"_INPUT_NAME_\"\n" +
+   "        , Html.Events.onInput _TYPE_NAME_\n" +
+   "        , Html.Attributes.value model._INPUT_NAME_\n" +
+   "        ]\n" +
+   "        []\n").replace(
+  /_INPUT_NAME_/g, input_name).replace(
+  /_TYPE_NAME_/g, type_name_foo);
+ }
+
+AddToModel initial_value='""', field_type="String", field_name=input_name
+
+AddMessage constructor={ type_name_foo + " String" },
+           update_model={ return "{ model | " + input_name + " = string }" },
+           deconstructor={ type_name_foo + " string" }
+
+AddImport module="Main", module_to_import="Html.Events"
+AddImport module="Main", module_to_import="Html.Attributes"
+
+AddFunction module="Main", code=function_body

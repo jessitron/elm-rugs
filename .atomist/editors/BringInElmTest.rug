@@ -1,0 +1,11 @@
+editor BringInElmTest
+
+with project begin
+  do eval { print("Please run `npm install -g elm-test` if you haven't yet!") }
+  do merge "elm-test-elm-package.json.vm" "tests/elm-package.json"
+  do merge "elm-test-Main.elm.vm" "tests/Main.elm"
+  do merge "elm-test-Tests.elm.vm" "tests/Tests.elm"
+end
+
+
+# now add each current dependency to tests/elm-package.json

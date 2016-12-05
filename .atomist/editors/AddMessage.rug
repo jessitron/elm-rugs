@@ -1,0 +1,43 @@
+@tag "elm"
+@description "Adds a Msg to an Elm program"
+editor AddMessage
+
+@displayName "Message Constructor"
+@description "Message constructor, its name and parameter types"
+param constructor: .*
+
+@displayName "Deconstructor"
+@description "What this looks like in a pattern match; leave blank if there are no type parameters"
+@optional
+@default ""
+param deconstructor: .*
+
+@displayName "Deconstructor"
+@description "What this looks like in a pattern match; leave blank if there are no type parameters"
+@optional
+@default "model"
+param update_model: .*
+
+let smarter_deconstructor = { if (deconstructor.length > 0) return deconstructor; else return constructor }
+
+AddToUnionType module="Main", type_name="Msg"
+AddUpdateClause module="Main", new_pattern=smarter_deconstructor, model_to_return=update_model
+
+editor AddToUnionType
+
+	@description "Where is this type"
+	@displayName "Module Name"
+	param module: [A-Z][\w]*
+
+  @description "The union type"
+  @displayName "Type"
+  param type_name: [a-z][\w]*
+
+  @description "The constructor to add, with its type parameters"
+  @displayName "Constructor"
+  param constructor: [a-z][\w]*
+
+  with file
+    with elm.module when name = module
+      with type t when name = type_name and { -1 === t.value().indexOf(constructor) }
+          do addConstructor constructor

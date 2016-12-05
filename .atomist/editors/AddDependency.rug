@@ -1,0 +1,20 @@
+@description "Add a dependency to elm-package.json"
+@tag "elm"
+editor AddDependency
+
+param dependency_name: .*
+
+param dependency_version: .*
+
+let old_thinger={ return "\"dependencies\": ."; }
+let new_thinger={
+    return "\"" +
+     dependency_name +
+     "\" : \"" +
+     dependency_version + "\",\n" +
+     "        \"elm-lang/core\":";
+   }
+
+with project
+  with file when path="elm-package.json"
+    do regexpReplace "\"elm-lang/core\":" new_thinger

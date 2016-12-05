@@ -1,0 +1,79 @@
+@tag "elm"
+@description "Upgrade from Beginner Program to Program"
+editor UpgradeToProgram
+
+let module="Main"
+
+UpgradeMainFunction
+AddSubscriptionsFunction
+UpgradeInit
+UpgradeUpdate
+
+editor UpgradeUpdate
+  param module: .*
+
+  Print message="upgrading update function"
+
+  with file ff begin
+    with elm.module when name = module
+      # use alias f to avoid issues with JavaScript reserved word
+      with function f when name = 'update' begin
+        do changeType 'Msg -> Model -> ( Model, Cmd Msg )'
+        with case c when matchAsString = "msg"
+          with caseClause cc
+            do replaceBody { cc.body() + " ! []" }
+      end
+  end
+
+editor UpgradeInit
+  param module: .*
+
+  Print message="upgrading init function"
+
+  with file f begin
+    # do eval { print("processing file in UpgradeInit " + f.path()) }
+    with elm.module when name = module
+      with function f when name = 'model'
+      begin
+        do changeType '( Model, Cmd Msg )'
+        do rename 'init'
+        do replaceBody { f.body() + " ! []" }
+      end
+  end
+
+editor AddSubscriptionsFunction
+  param module: .*
+
+  Print message="adding subscription function"
+
+  with file f begin
+    # do eval { print("processing file in AddSub " + f.path()) }
+    with elm.module when name = module begin
+      do addFunction { "\n\n-- SUBSCRIPTIONS\n\n\nsubscriptions model =\n    Sub.none\n\n" }
+    end
+  end
+
+editor UpgradeMainFunction
+  param module: .*
+
+  Print message="upgrading main function"
+
+  with file f begin
+    # do eval { print("processing file in UpgradeMain " + f.path()) }
+    with elm.module when name = module
+      begin
+        with function f when name = 'main'
+          do replaceBody{ return (
+             "Html.program" + "\n" +
+             "        {  init = init" + "\n" +
+             "        , subscriptions = subscriptions" + "\n" +
+             "        , update = update" + "\n" +
+             "        , view = view" + "\n" +
+             "        }\n") }
+       end
+  end
+
+editor Print
+  param message: .*
+  with project p
+    do eval { print(message) }
