@@ -11,13 +11,23 @@ Way Major Caveat!! I only know that these work on the particular code I've run t
 
 ## Generators
 Generators create a new project from scratch.
+
+Sample usage, to create a project called `banana` as a subdirectory of the current directory:
+
+`rug create jessitron:elm-rugs:StaticPage banana`
+
 ### StaticPage
 A new Elm program with a main function that returns an empty div. Start here to create your basic UI, and then add interactivity with UpgradeToBeginnerProgram.
+
 
 ## Editors
 Editors operate on an existing project. They change the Elm code for you, in ways that you're likely to do often.
 
 I'm only listing the top-level editors here. That are also small ones (like AddToModel or AddMessage) that are really units of composition for the bigger ones listed here.
+
+Sample usage, to add a text input to an existing beginner program (run this in your Elm project's directory):
+
+`rug edit jessitron:elm-rugs:AddTextInput input_name=favoriteColor`
 
 ### UpgradeToBeginnerProgram
 If you have a Static Page, this moves the content of `main` into `view` and provides the outline of an Elm Beginner Program. (see: [The Elm Architecture](https://guide.elm-lang.org/architecture/))
