@@ -19,6 +19,6 @@
     },
     "homepage": "https://github.com/jessitron/elm-template#readme",
     "dependencies": {
-        "@atomist/rug": "0.4.2"
+        "@atomist/rug": "0.5.4"
     }
 }
