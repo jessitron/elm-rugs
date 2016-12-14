@@ -4,11 +4,11 @@ editor AddImportExposure
 
 @optional
 @default "Main"
-param containing_module: .*
+param containing_module: ^.*$
 
-param imported_module: .*
+param imported_module: ^.*$
 
-param new_exposure: .*
+param new_exposure: ^.*$
 
 with project
   with file
