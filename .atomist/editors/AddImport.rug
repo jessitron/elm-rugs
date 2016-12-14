@@ -4,10 +4,10 @@ editor AddImport
 
   @optional
   @default "Main"
-  param module: [A-Z][\w]*
+  param module: ^[A-Z][\w]*$
 
   @description "The import to add, fully qualified"
-  param module_to_import: .*
+  param module_to_import: ^.*$
 
   with file f
     with elm.module m when name = module begin

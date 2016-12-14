@@ -5,18 +5,18 @@ editor AddToModel
 @displayName "Field Name"
 @maxLength 21
 @description "Name of the new model field"
-param field_name: [a-z][\w]*
+param field_name: ^[A-Z][\w]*$
 
 
 @displayName "Field Type"
 @description "Type of the new field"
 @validInput "An Elm type"
-param field_type: .*
+param field_type: ^.*$
 
 @description "Initial value of the field"
 @displayName "Initial Value"
 @validInput "If this is a string, please include quotes"
-param initial_value: .*
+param initial_value: ^.*$
 
 AddToRecordTypeAlias type_name="Model", module="Main"
 AddToModelInitialization module="Main", field_value=initial_value
@@ -27,21 +27,21 @@ editor AddToRecordTypeAlias
 
   @description "Where is this type alias"
   @displayName "Module Name"
-  param module: .*
+  param module: ^.*$
 
   @description "Name of the type alias to change"
   @displayName "Type alias Name"
-  param type_name: [a-z][\w]*
+  param type_name: ^[A-Z][\w]*$
 
   @displayName "Field Name"
   @description "Name of the new model field"
-  param field_name: [a-z][\w]*
+  param field_name: ^[A-Z][\w]*$
 
 
   @displayName "Field Type"
   @description "Type of the new field"
   @validInput "An Elm type"
-  param field_type: .*
+  param field_type: ^.*$
 
 with file
   with elm.module when name = module
@@ -54,20 +54,20 @@ editor AddToModelInitialization
 
   @description "Elm module to modify"
   @displayName "Module Name"
-  param module: .*
+  param module: ^.*$
 
   @displayName "Field Name"
   @description "Name of the new model field"
-  param field_name: [a-z][\w]*
+  param field_name: ^[A-Z][\w]*$
 
 
   @displayName "Field Value"
   @description "Populate the new field"
   @validInput "An Elm expression"
-  param field_value: .*
+  param field_value: ^.*$
 
   @description "If it is a string we will make sure the value is quoted"
-  param field_type: .*
+  param field_type: ^.*$
 
   let field_value_careful = {
     var quoted = /^".*"$/

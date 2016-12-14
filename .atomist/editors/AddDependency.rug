@@ -2,9 +2,9 @@
 @tag "elm"
 editor AddDependency
 
-param dependency_name: .*
+param dependency_name: ^.*$
 
-param dependency_version: .*
+param dependency_version: ^.*$
 
 let old_thinger={ return "\"dependencies\": ."; }
 let new_thinger={
