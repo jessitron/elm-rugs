@@ -14,7 +14,7 @@ Generators create a new project from scratch.
 
 Sample usage, to create a project called `banana` as a subdirectory of the current directory:
 
-`rug create jessitron:elm-rugs:StaticPage banana`
+`rug generate jessitron:elm-rugs:StaticPage banana`
 
 ### StaticPage
 A new Elm program with a main function that returns an empty div. Start here to create your basic UI, and then add interactivity with UpgradeToBeginnerProgram.
