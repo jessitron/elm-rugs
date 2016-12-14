@@ -5,13 +5,13 @@ editor AddToModel
 @displayName "Field Name"
 @maxLength 21
 @description "Name of the new model field"
-param field_name: ^[A-Z][\w]*$
+param field_name: ^[a-z][\w]*$
 
 
 @displayName "Field Type"
 @description "Type of the new field"
 @validInput "An Elm type"
-param field_type: ^.*$
+param field_type: ^[A-Z]\w*$
 
 @description "Initial value of the field"
 @displayName "Initial Value"
@@ -35,7 +35,7 @@ editor AddToRecordTypeAlias
 
   @displayName "Field Name"
   @description "Name of the new model field"
-  param field_name: ^[A-Z][\w]*$
+  param field_name: ^[a-z][\w]*$
 
 
   @displayName "Field Type"
