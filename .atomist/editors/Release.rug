@@ -1,6 +1,0 @@
-@tag "elm"
-@description "Add a handy script for releasing to github pages"
-editor Release
-
-with project
-  do merge "release.vm" "release"

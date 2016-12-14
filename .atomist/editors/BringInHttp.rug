@@ -4,7 +4,7 @@ editor BringInHttp
 
 @optional
 @default "String"
-param type_to_fetch: .*
+param type_to_fetch: ^.*$
 
 let success_constructor={ "FetchSuccess " + type_to_fetch }
 let lowercase_type_to_fetch={ type_to_fetch.charAt(0).toLowerCase() + type_to_fetch.slice(1) }

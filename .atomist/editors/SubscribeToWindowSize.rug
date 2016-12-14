@@ -4,7 +4,7 @@ editor SubscribeToWindowSize
 
 @optional
 @default "SomeError"
-param errorMsg: .*
+param errorMsg: ^.*$
 
 Subscribe library_name="elm-lang/window",
           library_version="1.0.0 <= v < 2.0.0",
@@ -24,7 +24,7 @@ AddInitialCommand command="Task.perform SomeError WindowSize Window.size"
 
 editor AddInitialCommand
 
-param command: .*
+param command: ^.*$
 # TODO: I am assuming the list of commands is currently empty. Will overwrite any existing.
 with file f
   with elm.module when name = "Main"

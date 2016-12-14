@@ -2,7 +2,7 @@
 @description "Add a subscription to the subscriptions function"
 editor AddSubscription
 
-param subscription: .*
+param subscription: ^.*$
 
 with file
   with elm.module when name = "Main" begin
@@ -10,7 +10,7 @@ with file
     with function f when name = "subscriptions" and { -1 === f.body().indexOf(subscription) }
       do replaceBody {
         if (f.body().trim() === "Sub.none") {
-          print ("Replacing body with this subscription: " + subscription) 
+          print ("Replacing body with this subscription: " + subscription)
           return subscription;
         }
         if (0 === f.body().indexOf("Sub.batch")) {

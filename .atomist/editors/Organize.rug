@@ -2,7 +2,7 @@
 @description "make a bare Elm program into a workable project"
 editor Organize
 
-param project_name: .*
+param project_name: ^.*$
 
 AddGitIgnore
 RenameModuleToMain

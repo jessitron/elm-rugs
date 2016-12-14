@@ -4,19 +4,19 @@ editor AddMessage
 
 @displayName "Message Constructor"
 @description "Message constructor, its name and parameter types"
-param constructor: .*
+param constructor: ^.*$
 
 @displayName "Deconstructor"
 @description "What this looks like in a pattern match; leave blank if there are no type parameters"
 @optional
 @default ""
-param deconstructor: .*
+param deconstructor: ^.*$
 
 @displayName "Deconstructor"
 @description "What this looks like in a pattern match; leave blank if there are no type parameters"
 @optional
 @default "model"
-param update_model: .*
+param update_model: ^.*$
 
 let smarter_deconstructor = { if (deconstructor.length > 0) return deconstructor; else return constructor }
 
@@ -27,15 +27,15 @@ editor AddToUnionType
 
 	@description "Where is this type"
 	@displayName "Module Name"
-	param module: [A-Z][\w]*
+	param module: ^[a-z][\w]*$
 
   @description "The union type"
   @displayName "Type"
-  param type_name: [a-z][\w]*
+  param type_name: ^[a-z][\w]*$
 
   @description "The constructor to add, with its type parameters"
   @displayName "Constructor"
-  param constructor: [a-z][\w]*
+  param constructor: ^[a-z][\w]*$
 
   with file
     with elm.module when name = module

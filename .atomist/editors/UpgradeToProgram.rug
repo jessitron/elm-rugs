@@ -10,7 +10,7 @@ UpgradeInit
 UpgradeUpdate
 
 editor UpgradeUpdate
-  param module: .*
+  param module: ^.*$
 
   Print message="upgrading update function"
 
@@ -26,7 +26,7 @@ editor UpgradeUpdate
   end
 
 editor UpgradeInit
-  param module: .*
+  param module: ^.*$
 
   Print message="upgrading init function"
 
@@ -42,7 +42,7 @@ editor UpgradeInit
   end
 
 editor AddSubscriptionsFunction
-  param module: .*
+  param module: ^.*$
 
   Print message="adding subscription function"
 
@@ -54,7 +54,7 @@ editor AddSubscriptionsFunction
   end
 
 editor UpgradeMainFunction
-  param module: .*
+  param module: ^.*$
 
   Print message="upgrading main function"
 
@@ -74,6 +74,6 @@ editor UpgradeMainFunction
   end
 
 editor Print
-  param message: .*
+  param message: ^.*$
   with project p
     do eval { print(message) }

@@ -3,24 +3,24 @@
 editor Subscribe
 
 @description "The library that provides the subscription"
-param library_name: .*
+param library_name: ^.*$
 
-param library_version: .*
+param library_version: ^.*$
 
 @description "Package that contains the function that gives us a subscription"
-param namespace: .*
+param namespace: ^.*$
 
 @description "Function to call that gives us a subscription"
-param name_of_subscription: .*
+param name_of_subscription: ^.*$
 
 @description "Message to pass around to respond to subscription"
-param message: .*
+param message: ^.*$
 
 @description "Type of data the subscription provides"
-param type_of_content: .*
+param type_of_content: ^.*$
 
 @description "What to call the model field that holds the data we get from the subscription"
-param name_of_content: .*
+param name_of_content: ^.*$
 
 AddDependency dependency_name=library_name, dependency_version=library_version
 
