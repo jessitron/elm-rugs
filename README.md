@@ -2,6 +2,8 @@
 
 This repository contains scripts for starting and upgrading Elm programs. The scripts run in [Rug](http://docs.atomist.com/rug/why-and-what-is-rug/), a DSL and runtime for code that modifies code.
 
+Here's a writeup: [Using Rug with Elm](http://blog.jessitron.com/2016/12/using-rug-with-elm.html)
+
 To use these scripts:
 The Atomist bot in [Atomist Community Slack](https://join.atomist.com) can run the published versions. The bot will create a repo for you in response to `@atomist create`, or send a PR to an existing repo on `@atomist edit`. In the #rug-elm channel, type "@atomist create elm" to start.
 
