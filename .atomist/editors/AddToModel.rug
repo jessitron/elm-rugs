@@ -35,7 +35,7 @@ editor AddToRecordTypeAlias
 
   @displayName "Field Name"
   @description "Name of the new model field"
-  param field_name: ^[a-z][\w]*$
+  param field_name: ^[a-z ][\w]*$
 
 
   @displayName "Field Type"
@@ -58,7 +58,7 @@ editor AddToModelInitialization
 
   @displayName "Field Name"
   @description "Name of the new model field"
-  param field_name: ^[A-Z][\w]*$
+  param field_name: ^[a-z][\w]*$
 
 
   @displayName "Field Value"
