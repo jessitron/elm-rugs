@@ -9,7 +9,7 @@ editor AddFunction
   @displayName "Code"
   @description "All the code to add"
   @validInput "An Elm declaration"
-  param code: ^.*$
+  param code: ^(?s).*$
 
   with file f when { -1 == f.content().indexOf(code) }
     with elm.module when name = module

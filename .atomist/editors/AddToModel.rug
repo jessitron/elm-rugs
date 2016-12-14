@@ -11,7 +11,7 @@ param field_name: ^[a-z][\w]*$
 @displayName "Field Type"
 @description "Type of the new field"
 @validInput "An Elm type"
-param field_type: ^[A-Z]\w*$
+param field_type: ^[A-Z].*$
 
 @description "Initial value of the field"
 @displayName "Initial Value"
@@ -41,7 +41,7 @@ editor AddToRecordTypeAlias
   @displayName "Field Type"
   @description "Type of the new field"
   @validInput "An Elm type"
-  param field_type: ^.*$
+  param field_type: ^[A-Z].*$
 
 with file
   with elm.module when name = module
@@ -67,7 +67,7 @@ editor AddToModelInitialization
   param field_value: ^.*$
 
   @description "If it is a string we will make sure the value is quoted"
-  param field_type: ^.*$
+  param field_type: ^[A-Z].*$
 
   let field_value_careful = {
     var quoted = /^".*"$/

@@ -35,7 +35,7 @@ editor AddToUnionType
 
   @description "The constructor to add, with its type parameters"
   @displayName "Constructor"
-  param constructor: ^[A-Z][\w]*$
+  param constructor: ^[A-Z].*$
 
   with file
     with elm.module when name = module
