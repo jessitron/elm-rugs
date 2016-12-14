@@ -75,5 +75,5 @@ Subscribe to mouse clicks, and save the mouse position of the last click in a mo
 ### SubscribeToWindowSize
 Get the window size, both on initialization and at every resize. Store it in the model.
 
-### FocusCommand
+### FocusCommand 
 Add a function `requestFocus: String -> Cmd Msg` that lets you send a focus request. Pass it a field ID. If that field doesn't exist, you'll hear about it in a `FieldIdNotFound` message, which you can spot in the debugger.
