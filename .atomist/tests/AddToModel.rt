@@ -1,0 +1,32 @@
+scenario valid parameters
+
+given
+   ArchiveRoot
+
+when
+   AddToModel field_name="age", field_type="Int", initial_value=45
+
+then
+   NoChange
+
+scenario field name cannot start with uppercase
+
+given
+   ArchiveRoot
+
+when
+   AddToModel field_name="Age", field_type="Int", initial_value=45
+
+then
+   InvalidParameters
+
+scenario field name cannot start with lowercase
+
+given
+   ArchiveRoot
+
+when
+   AddToModel field_name="age", field_type="int", initial_value=45
+
+then
+   InvalidParameters
