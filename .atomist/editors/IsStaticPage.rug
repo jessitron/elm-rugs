@@ -1,0 +1,6 @@
+@description "is static page program "
+predicate IsStaticPage
+  with project p
+      when fileExists "src/Main.elm"
+      and fileContains "src/Main.elm" "main : Html Never"
+      and not fileContains "src/Main.elm" "beginnerProgram"
