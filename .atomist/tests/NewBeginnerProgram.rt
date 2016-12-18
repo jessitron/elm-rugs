@@ -1,5 +1,4 @@
-scenario New project should pass smoke test
-debug=true
+scenario
 
 let project_name = "ElmIsAwesome"
 
