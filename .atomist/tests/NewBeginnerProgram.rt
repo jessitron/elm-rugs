@@ -11,4 +11,4 @@ when
 
 then
   fileExists "resources/index.html"
-  and fileContains  "resources/index.html" "<title>ElmIsAwesome</title>"
+  and fileContains "<title>ElmIsAwesome</title>"
