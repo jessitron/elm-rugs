@@ -2,12 +2,12 @@
 
 This repository contains scripts for starting and upgrading Elm programs. The scripts run in [Rug](http://docs.atomist.com/rug/why-and-what-is-rug/), a DSL and runtime for code that modifies code.
 
-Here's a writeup: [Using Rug with Elm](http://blog.jessitron.com/2016/12/using-rug-with-elm.html)
+Here's a writeup of how to get started: [Using Rug with Elm](http://blog.jessitron.com/2016/12/using-rug-with-elm.html)
 
-To use these scripts:
-The Atomist bot in [Atomist Community Slack](https://join.atomist.com) can run the published versions. The bot will create a repo for you in response to `@atomist create`, or send a PR to an existing repo on `@atomist edit`. In the #rug-elm channel, type "@atomist create elm" to start.
+In general, there are two ways to run Rugs.
+The Atomist bot in [Atomist Community Slack](https://join.atomist.com) can run the published versions. The bot will create a repo for you in response to `@atomist create`, or send a PR to an existing repo on `@atomist edit` (after you authorize it to do this in your github account). In the #rug-elm channel, type "@atomist create elm" to start.
 
-To run (and change!) the latest versions of these Rugs, clone this repo and use the [Rug CLI](https://docs.atomist.com/quick-starts/rug-cli/).
+To run locally (and change!) the latest versions of these Rugs, clone this repo and use the [Rug CLI](https://docs.atomist.com/quick-starts/rug-cli/).
 
 Way Major Caveat!! I only know that these work on the particular code I've run them on. They're going to fail a lot. Issues welcome.
 
