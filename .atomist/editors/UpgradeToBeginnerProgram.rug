@@ -1,5 +1,8 @@
 editor UpgradeToBeginnerProgram
 
+
+precondition IsStaticPage
+
 let guts = """main : Program Never Model Msg
 main =
     Html.beginnerProgram
@@ -51,7 +54,7 @@ AddImport module="Main", module_to_import="Html"
 AddImportExposure containing_module="Main", imported_module="Html", new_exposure="Html"
 
 
-with file f when path="src/Main.elm" begin
+with file f when path="src/Main.elm" and begin
     do replace "main : Html Never" ""
     do replace "Html Never" "Html Msg"
     do replace "main =" guts

@@ -1,0 +1,12 @@
+scenario UpgradeToBeginnerProgram
+
+given
+   ArchiveRoot
+
+when
+   UpgradeToBeginnerProgram
+
+then
+   fileExists "src/Main.elm"
+      and fileContains "src/Main.elm" "Html.beginnerProgram"
+
