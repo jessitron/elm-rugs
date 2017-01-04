@@ -37,7 +37,7 @@ editor AddToUnionType
   @displayName "Constructor"
   param constructor: ^[A-Z].*$
 
-  with file
+  with File
     with elm.module when name = module
       with type t when name = type_name and { -1 === t.value().indexOf(constructor) }
           do addConstructor constructor

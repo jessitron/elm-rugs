@@ -43,7 +43,7 @@ editor AddToRecordTypeAlias
   @validInput "An Elm type"
   param field_type: ^[A-Z].*$
 
-with file
+with File
   with elm.module when name = module
     with type.alias when name = type_name
       with recordType r when { -1 === r.childrenNames().indexOf(field_name) }
@@ -82,7 +82,7 @@ editor AddToModelInitialization
   }
 
 
-  with file
+  with File
     with elm.module when name = module
       with function f when { f.name() == "init" || f.name() == "model"} begin
         with recordValue r when { -1 === r.childrenNames().indexOf(field_name) } begin

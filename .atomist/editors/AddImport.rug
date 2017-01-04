@@ -9,7 +9,7 @@ editor AddImport
   @description "The import to add, fully qualified"
   param module_to_import: ^.*$
 
-  with file f
+  with File f
     with elm.module m when name = module begin
       do eval { print("Adding import " + module_to_import + " to module " + m.name() + " in " + m.filename())}
       do addImportStatement {"import " + module_to_import}

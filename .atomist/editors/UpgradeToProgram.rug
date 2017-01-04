@@ -14,7 +14,7 @@ editor UpgradeUpdate
 
   Print message="upgrading update function"
 
-  with file ff begin
+  with File ff begin
     with elm.module when name = module
       # use alias f to avoid issues with JavaScript reserved word
       with function f when name = 'update' begin
@@ -30,7 +30,7 @@ editor UpgradeInit
 
   Print message="upgrading init function"
 
-  with file f begin
+  with File f begin
     # do eval { print("processing file in UpgradeInit " + f.path()) }
     with elm.module when name = module
       with function f when name = 'model'
@@ -46,7 +46,7 @@ editor AddSubscriptionsFunction
 
   Print message="adding subscription function"
 
-  with file f begin
+  with File f begin
     # do eval { print("processing file in AddSub " + f.path()) }
     with elm.module when name = module begin
       do addFunction { "\n\n-- SUBSCRIPTIONS\n\n\nsubscriptions model =\n    Sub.none\n\n" }
@@ -58,7 +58,7 @@ editor UpgradeMainFunction
 
   Print message="upgrading main function"
 
-  with file f begin
+  with File f begin
     # do eval { print("processing file in UpgradeMain " + f.path()) }
     with elm.module when name = module
       begin
@@ -75,5 +75,5 @@ editor UpgradeMainFunction
 
 editor Print
   param message: ^.*$
-  with project p
+  with Project p
     do eval { print(message) }

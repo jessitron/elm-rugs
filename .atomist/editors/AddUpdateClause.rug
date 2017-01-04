@@ -18,7 +18,7 @@ editor AddUpdateClause
 	@validInput "An Elm expression"
 	param model_to_return: ^.*$
 
-with file
+with File
   with elm.module when name = module
     with function upd when name = "update" and { -1 == upd.body().indexOf(new_pattern + ' ->')} begin
 		  do eval { print("model_to_return is " + model_to_return)}

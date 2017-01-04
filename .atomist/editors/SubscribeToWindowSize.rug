@@ -26,7 +26,7 @@ editor AddInitialCommand
 
 param command: ^.*$
 # TODO: I am assuming the list of commands is currently empty. Will overwrite any existing.
-with file f
+with File f
   with elm.module when name = "Main"
     with function f when name = "init"
       do replaceBody {

@@ -11,6 +11,6 @@ editor AddFunction
   @validInput "An Elm declaration"
   param code: ^(?s).*$
 
-  with file f when { -1 == f.content().indexOf(code) }
+  with File f when { -1 == f.content().indexOf(code) }
     with elm.module when name = module
       do addFunction code

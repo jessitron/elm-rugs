@@ -15,6 +15,6 @@ let new_thinger={
      "        \"elm-lang/core\":";
    }
 
-with project
-  with file when path="elm-package.json"
+with Project
+  with File when path="elm-package.json"
     do regexpReplace "\"elm-lang/core\":" new_thinger

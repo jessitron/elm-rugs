@@ -69,7 +69,7 @@ editor SwitchProjectName
 	@displayName "Name"
 	param project_name: @project_name
 
-  with file when path = "resources/index.html"
+  with File when path = "resources/index.html"
 	  begin
   	  do regexpReplace "<title>.*</title>" { "<title>" + project_name + "</title>"}
 		end
