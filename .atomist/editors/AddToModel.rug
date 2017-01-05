@@ -46,7 +46,7 @@ editor AddToRecordTypeAlias
 with File
   with ElmModule when name = module
     with type.alias when name = type_name
-      with recordType r when { -1 === r.childrenNames().indexOf(field_name) }
+      with recordType r
         do add field_name field_type
 
 @description "Add a field to a record value"
@@ -85,7 +85,7 @@ editor AddToModelInitialization
   with File
     with ElmModule when name = module
       with function f when { f.name() == "init" || f.name() == "model"} begin
-        with recordValue r when { -1 === r.childrenNames().indexOf(field_name) } begin
+        with recordValue r begin
           do add field_name field_value_careful
         end
       end
