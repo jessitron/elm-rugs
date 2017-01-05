@@ -21,7 +21,7 @@ with Project
 editor RenameModuleToMain
 with Project
   with File f
-    with elm.module m when exposes("main") begin
+    with ElmModule m when exposes("main") begin
       do rename "Main"
     end
 

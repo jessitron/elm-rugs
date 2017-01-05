@@ -12,5 +12,5 @@ editor AddFunction
   param code: ^(?s).*$
 
   with File f when { -1 == f.content().indexOf(code) }
-    with elm.module when name = module
+    with ElmModule when name = module
       do addFunction code

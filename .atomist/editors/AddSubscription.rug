@@ -5,7 +5,7 @@ editor AddSubscription
 param subscription: ^.*$
 
 with File
-  with elm.module when name = "Main" begin
+  with ElmModule when name = "Main" begin
     do eval { print ("Adding this subscription: " + subscription) }
     with function f when name = "subscriptions" and { -1 === f.body().indexOf(subscription) }
       do replaceBody {

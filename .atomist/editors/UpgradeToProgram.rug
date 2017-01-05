@@ -15,7 +15,7 @@ editor UpgradeUpdate
   Print message="upgrading update function"
 
   with File ff begin
-    with elm.module when name = module
+    with ElmModule when name = module
       # use alias f to avoid issues with JavaScript reserved word
       with function f when name = 'update' begin
         do changeType 'Msg -> Model -> ( Model, Cmd Msg )'
@@ -32,7 +32,7 @@ editor UpgradeInit
 
   with File f begin
     # do eval { print("processing file in UpgradeInit " + f.path()) }
-    with elm.module when name = module
+    with ElmModule when name = module
       with function f when name = 'model'
       begin
         do changeType '( Model, Cmd Msg )'
@@ -48,7 +48,7 @@ editor AddSubscriptionsFunction
 
   with File f begin
     # do eval { print("processing file in AddSub " + f.path()) }
-    with elm.module when name = module begin
+    with ElmModule when name = module begin
       do addFunction { "\n\n-- SUBSCRIPTIONS\n\n\nsubscriptions model =\n    Sub.none\n\n" }
     end
   end
@@ -60,7 +60,7 @@ editor UpgradeMainFunction
 
   with File f begin
     # do eval { print("processing file in UpgradeMain " + f.path()) }
-    with elm.module when name = module
+    with ElmModule when name = module
       begin
         with function f when name = 'main'
           do replaceBody{ return (

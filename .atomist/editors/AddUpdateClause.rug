@@ -19,7 +19,7 @@ editor AddUpdateClause
 	param model_to_return: ^.*$
 
 with File
-  with elm.module when name = module
+  with ElmModule when name = module
     with function upd when name = "update" and { -1 == upd.body().indexOf(new_pattern + ' ->')} begin
 		  do eval { print("model_to_return is " + model_to_return)}
       with case c when { upd.typeSpecification().endsWith("Model")}
