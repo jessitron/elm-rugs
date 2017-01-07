@@ -10,12 +10,12 @@ UpgradeInit
 UpgradeUpdate
 
 editor UpgradeUpdate
-  param module: .*
+  param module: ^.*$
 
   Print message="upgrading update function"
 
-  with file ff begin
-    with elm.module when name = module
+  with File ff begin
+    with ElmModule when name = module
       # use alias f to avoid issues with JavaScript reserved word
       with function f when name = 'update' begin
         do changeType 'Msg -> Model -> ( Model, Cmd Msg )'
@@ -26,13 +26,13 @@ editor UpgradeUpdate
   end
 
 editor UpgradeInit
-  param module: .*
+  param module: ^.*$
 
   Print message="upgrading init function"
 
-  with file f begin
+  with File f begin
     # do eval { print("processing file in UpgradeInit " + f.path()) }
-    with elm.module when name = module
+    with ElmModule when name = module
       with function f when name = 'model'
       begin
         do changeType '( Model, Cmd Msg )'
@@ -42,25 +42,25 @@ editor UpgradeInit
   end
 
 editor AddSubscriptionsFunction
-  param module: .*
+  param module: ^.*$
 
   Print message="adding subscription function"
 
-  with file f begin
+  with File f begin
     # do eval { print("processing file in AddSub " + f.path()) }
-    with elm.module when name = module begin
+    with ElmModule when name = module begin
       do addFunction { "\n\n-- SUBSCRIPTIONS\n\n\nsubscriptions model =\n    Sub.none\n\n" }
     end
   end
 
 editor UpgradeMainFunction
-  param module: .*
+  param module: ^.*$
 
   Print message="upgrading main function"
 
-  with file f begin
+  with File f begin
     # do eval { print("processing file in UpgradeMain " + f.path()) }
-    with elm.module when name = module
+    with ElmModule when name = module
       begin
         with function f when name = 'main'
           do replaceBody{ return (
@@ -74,6 +74,6 @@ editor UpgradeMainFunction
   end
 
 editor Print
-  param message: .*
-  with project p
+  param message: ^.*$
+  with Project p
     do eval { print(message) }

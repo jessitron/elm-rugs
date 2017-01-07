@@ -2,7 +2,7 @@
 @description "make a bare Elm program into a workable project"
 editor Organize
 
-param project_name: .*
+param project_name: ^.*$
 
 AddGitIgnore
 RenameModuleToMain
@@ -11,33 +11,33 @@ IndexHtml
 AddBuildScript
 
 editor AddGitIgnore
-with project
+with Project
   do addFile name=".gitignore" content={ "elm-stuff\ntarget" }
 
 editor AddBuildScript
-with project
+with Project
   do copyEditorBackingFileOrFail sourcePath="build"
 
 editor RenameModuleToMain
-with project
-  with file f
-    with elm.module m when exposes("main") begin
+with Project
+  with File f
+    with ElmModule m when exposes("main") begin
       do rename "Main"
     end
 
 editor MoveElmToSrc
 
-with project begin
-  with file e when nameContains ".elm" and { -1 === e.path().indexOf("elm-stuff") } begin
+with Project begin
+  with File e when nameContains ".elm" and { -1 === e.path().indexOf("elm-stuff") } begin
     do e.setPath newPath={ "src/" + e.name() }
   end
-  with file when path = "elm-package.json"
+  with File when path = "elm-package.json"
     do regexpReplace '"\."' '"src"'
 end
 
 editor IndexHtml
 
-with project begin
+with Project begin
   do deleteFile "index.html"
   do merge "index.html.vm" to "resources/index.html"
   do merge "styles.css.vm" to "resources/styles.css"

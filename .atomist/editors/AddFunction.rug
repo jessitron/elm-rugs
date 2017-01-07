@@ -4,13 +4,13 @@ editor AddFunction
 
   @description "Where does this belong"
   @displayName "Module Name"
-  param module: [A-Z][\w]*
+  param module: ^[A-Z][\w]*$
 
   @displayName "Code"
   @description "All the code to add"
   @validInput "An Elm declaration"
-  param code: .*
+  param code: ^(?s).*$
 
-  with file f when { -1 == f.content().indexOf(code) }
-    with elm.module when name = module
+  with File f when { -1 == f.content().indexOf(code) }
+    with ElmModule when name = module
       do addFunction code

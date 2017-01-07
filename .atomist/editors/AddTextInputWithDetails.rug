@@ -5,18 +5,18 @@ editor AddTextInputWithDetails
 @displayName "Name"
 @description "Name of the text input (the field to store in the model)"
 @validInput "An elm identifier"
-param input_name: [a-z][\w]*
+param input_name: ^[a-z][\w]*$
 
 @description "HTML type attribute for the text input"
 @optional
 @default ""
 @validInput "`text` or `password` or empty string for none"
-param html_input_type: [a-z]+
+param html_input_type: ^[a-z]+$
 
 @description "HTML placeholder attribute, text to indicate purpose"
 @optional
 @default ""
-param placeholder_text: .*
+param placeholder_text: ^.*$
 
 # capitalize
 let type_name_foo={ input_name.charAt(0).toUpperCase() + input_name.slice(1) }

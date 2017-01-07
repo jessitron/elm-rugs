@@ -3,7 +3,7 @@
 editor OnEnter
 
 @description "A message that you're likely to send when enter is pressed"
-param enter_message: .*
+param enter_message: ^.*$
 
 
 let on_enter_function="""onEnter : Msg -> Html.Attribute Msg

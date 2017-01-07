@@ -2,10 +2,12 @@
 
 This repository contains scripts for starting and upgrading Elm programs. The scripts run in [Rug](http://docs.atomist.com/rug/why-and-what-is-rug/), a DSL and runtime for code that modifies code.
 
-To use these scripts:
-The Atomist bot in [Atomist Community Slack](https://join.atomist.com) can run the published versions. The bot will create a repo for you in response to `@atomist create`, or send a PR to an existing repo on `@atomist edit`. In the #rug-elm channel, type "@atomist create elm" to start.
+Here's a writeup of how to get started: [Using Rug with Elm](http://blog.jessitron.com/2016/12/using-rug-with-elm.html)
 
-To run (and change!) the latest versions of these Rugs, clone this repo and use the [Rug CLI](https://docs.atomist.com/quick-starts/rug-cli/).
+In general, there are two ways to run Rugs.
+The Atomist bot in [Atomist Community Slack](https://join.atomist.com) can run the published versions. The bot will create a repo for you in response to `@atomist create`, or send a PR to an existing repo on `@atomist edit` (after you authorize it to do this in your github account). In the #rug-elm channel, type "@atomist create elm" to start.
+
+To run locally (and change!) the latest versions of these Rugs, clone this repo and use the [Rug CLI](https://docs.atomist.com/quick-starts/rug-cli/).
 
 Way Major Caveat!! I only know that these work on the particular code I've run them on. They're going to fail a lot. Issues welcome.
 
@@ -14,7 +16,7 @@ Generators create a new project from scratch.
 
 Sample usage, to create a project called `banana` as a subdirectory of the current directory:
 
-`rug create jessitron:elm-rugs:StaticPage banana`
+`rug generate jessitron:elm-rugs:StaticPage banana`
 
 ### StaticPage
 A new Elm program with a main function that returns an empty div. Start here to create your basic UI, and then add interactivity with UpgradeToBeginnerProgram.
@@ -73,5 +75,5 @@ Subscribe to mouse clicks, and save the mouse position of the last click in a mo
 ### SubscribeToWindowSize
 Get the window size, both on initialization and at every resize. Store it in the model.
 
-### FocusCommand
+### FocusCommand 
 Add a function `requestFocus: String -> Cmd Msg` that lets you send a focus request. Pass it a field ID. If that field doesn't exist, you'll hear about it in a `FieldIdNotFound` message, which you can spot in the debugger.

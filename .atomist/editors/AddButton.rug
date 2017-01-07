@@ -5,11 +5,11 @@ editor AddButton
 @displayName "Name"
 @description "Name of the text button (the field to store in the model)"
 @validInput "An elm identifier"
-param button_text: [a-z][\w]*
+param button_text: ^.*$
 
 @description "Message to send when button is pressed"
 @validInput "An elm type name, like CreateThing"
-param button_message: .*
+param button_message: ^.*$
 
 # capitalize
 let function_body={

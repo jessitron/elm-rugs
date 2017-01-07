@@ -2,9 +2,9 @@
 @tag "elm"
 editor AddDependency
 
-param dependency_name: .*
+param dependency_name: ^.*$
 
-param dependency_version: .*
+param dependency_version: ^.*$
 
 let old_thinger={ return "\"dependencies\": ."; }
 let new_thinger={
@@ -15,6 +15,6 @@ let new_thinger={
      "        \"elm-lang/core\":";
    }
 
-with project
-  with file when path="elm-package.json"
+with Project
+  with File when path="elm-package.json"
     do regexpReplace "\"elm-lang/core\":" new_thinger

@@ -1,6 +1,6 @@
 editor BringInElmTest
 
-with project begin
+with Project begin
   do eval { print("Please run `npm install -g elm-test` if you haven't yet!") }
   do merge "elm-test-elm-package.json.vm" "tests/elm-package.json"
   do merge "elm-test-Main.elm.vm" "tests/Main.elm"
