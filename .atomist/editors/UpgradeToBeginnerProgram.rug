@@ -1,3 +1,4 @@
+@tag "elm"
 editor UpgradeToBeginnerProgram
 
 let guts = """main : Program Never Model Msg
