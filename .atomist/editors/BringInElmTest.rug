@@ -1,3 +1,4 @@
+@tag "elm"
 editor BringInElmTest
 
 with Project begin
