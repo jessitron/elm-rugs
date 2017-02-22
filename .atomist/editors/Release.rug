@@ -1,0 +1,4 @@
+editor Release
+
+with Project p
+    do merge "release.vm" "release"
