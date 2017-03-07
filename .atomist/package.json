@@ -19,6 +19,6 @@
     },
     "homepage": "https://github.com/jessitron/elm-rugs#readme",
     "dependencies": {
-        "@atomist/rug": "0.8.0"
+        "@atomist/rug": "0.12.0"
     }
 }

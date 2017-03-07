@@ -3,13 +3,16 @@
 set -e
 set -x
 
+rug_command="local-rug"
+
 echo "Running a bunch of rugs in succession"
 echo "This test requires elm installed"
 
 project_parent_dir=$(mktemp -d)
 project_name="banana"
+org="jessitron"
 
-rug -lRC $project_parent_dir generate StaticPage $project_name
+$rug_command -lRC $project_parent_dir generate StaticPage $project_name org=$org
 
 project_dir=$project_parent_dir/$project_name
 
@@ -19,7 +22,7 @@ project_dir=$project_parent_dir/$project_name
 #rug -lRC $project_dir edit UpgradeToProgram
 #rug -lRC $project_dir edit AddButton button_text="Hello Again" button_message=HelloAgain
 #rug -lRC $project_dir edit AddTextInput input_name=advancedInput
-rug -lRC $project_dir edit SubscribeToClicks
+#rug -lRC $project_dir edit SubscribeToClicks
 
 cd $project_dir
 ./build --yes
