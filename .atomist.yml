@@ -24,3 +24,19 @@ editor:
     branch: "master"
     sha: "e556ba9*"
 
+---
+kind: "operation"
+client: "rug-cli 0.24.0"
+editor:
+  name: "AddTypeScriptGenerator"
+  group: "atomist-rugs"
+  artifact: "rug-editors"
+  version: "0.13.0"
+  origin:
+    repo: "git@github.com:atomist-rugs/rug-editors"
+    branch: "allow-non-ts-projects"
+    sha: "82096c8*"
+  parameters:
+    - "generator_name": "StaticPage"
+    - "description": "A new Elm project, simplest possible"
+
