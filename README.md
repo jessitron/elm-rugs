@@ -1,5 +1,13 @@
 # Elm Generators and Editors for Rug
 
+OUT OF DATE
+
+Unfortunately these don't work with the current version of Rug. I have to rewrite the elm-parsing infrastructure first.
+This will probably happen in June 2017.
+
+## Sorry
+
+
 This repository contains scripts for starting and upgrading Elm programs. The scripts run in [Rug](http://docs.atomist.com/rug/why-and-what-is-rug/), a DSL and runtime for code that modifies code.
 
 Here's a writeup of how to get started: [Using Rug with Elm](http://blog.jessitron.com/2016/12/using-rug-with-elm.html)
