@@ -1,8 +1,8 @@
-import { PopulateProject } from '@atomist/rug/operations/ProjectGenerator'
-import { Project } from '@atomist/rug/model/Core'
-import { Pattern } from '@atomist/rug/operations/RugOperation'
-import { TreeNode } from '@atomist/rug/tree/PathExpression'
-import { Generator, Parameter, Tags } from '@atomist/rug/operations/Decorators'
+import { Project } from "@atomist/rug/model/Core";
+import { Generator, Parameter, Tags } from "@atomist/rug/operations/Decorators";
+import { PopulateProject } from "@atomist/rug/operations/ProjectGenerator";
+import { Pattern } from "@atomist/rug/operations/RugOperation";
+import { TreeNode } from "@atomist/rug/tree/PathExpression";
 
 @Generator("StaticPage", "create a new Elm project, simplest possible")
 @Tags("elm")
@@ -14,51 +14,49 @@ class StaticPage implements PopulateProject {
         pattern: Pattern.project_name,
         validInput: "a valid GitHub project name consisting of alphanumeric, ., -, and _ characters",
         minLength: 1,
-        maxLength: 100
+        maxLength: 100,
     })
-    project_name: string;
+    public projectName: string;
 
     @Parameter({
         displayName: "Organization",
         validInput: "github owner",
-        pattern: Pattern.group_id
+        pattern: Pattern.group_id,
     })
-    org: string;
+    public org: string;
 
     @Parameter({
         pattern: Pattern.any,
         validInput: "String of up to 80 characters",
-        maxLength: 80
+        maxLength: 80,
     })
-    description: string = "helpful summary of your project, less than 80 characters";
+    public description: string = "helpful summary of your project, less than 80 characters";
 
-    populate(project: Project) {
+    public populate(project: Project) {
 
-        let repo = "https://github.com/" + this.org + "/" + this.project_name.toLowerCase() + ".git"
-        let linkToGithubPages = "https://" + this.org + ".github.io/" + this.project_name
+        const repo = "https://github.com/" + this.org + "/" + this.projectName.toLowerCase() + ".git";
+        const linkToGithubPages = "https://" + this.org + ".github.io/" + this.projectName;
 
+        const index = project.findFile("resources/index.html");
+        index.regexpReplace("<title>.*</title>", "<title>" + this.projectName + "</title>");
 
-        let index = project.findFile("resources/index.html")
-        index.regexpReplace("<title>.*</title>", "<title>" + this.project_name + "</title>")
+        const eng = project.context().pathExpressionEngine();
 
-        let eng = project.context().pathExpressionEngine();
-
-
-        let elmPackage = project.findFile("elm-package.json")
-        eng.with<any>(elmPackage, `/Json()/repository`, e => {
-            e.setValue(repo)
-        })
-        eng.with<any>(elmPackage, `/Json()/summary`, e => {
+        const elmPackage = project.findFile("elm-package.json");
+        eng.with<any>(elmPackage, `/Json()/repository`, (e) => {
+            e.setValue(repo);
+        });
+        eng.with<any>(elmPackage, `/Json()/summary`, (e) => {
             console.log("Read some json");
-            e.setValue(this.description)
-        })
+            e.setValue(this.description);
+        });
 
-        let newReadmeContent = `# ${this.project_name}
+        const newReadmeContent = `# ${this.projectName}
 ${this.description}
 
 [See it live](${linkToGithubPages})`;
 
-        let readme = project.findFile("README.md");
+        const readme = project.findFile("README.md");
         readme.setContent(newReadmeContent);
 
         project.deleteFile(".atomist.yml");
