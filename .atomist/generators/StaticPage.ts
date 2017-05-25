@@ -39,7 +39,7 @@ class StaticPage implements PopulateProject {
         const index = project.findFile("resources/index.html");
         index.regexpReplace("<title>.*</title>", "<title>" + this.projectName + "</title>");
 
-        const eng = project.context().pathExpressionEngine();
+        const eng = project.context.pathExpressionEngine;
 
         const elmPackage = project.findFile("elm-package.json");
         eng.with<any>(elmPackage, `/Json()/repository`, (e) => {
