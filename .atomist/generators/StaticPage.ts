@@ -1,8 +1,7 @@
-import { Project } from "@atomist/rug/model/Core";
+import { Project } from "@atomist/rug/model/Project";
 import { Generator, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { PopulateProject } from "@atomist/rug/operations/ProjectGenerator";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
-import { TreeNode } from "@atomist/rug/tree/PathExpression";
 
 @Generator("StaticPage", "create a new Elm project, simplest possible")
 @Tags("elm")
