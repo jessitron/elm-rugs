@@ -4,4 +4,3 @@ version: "3.0.0"
 requires: "[1.0.0-m.3,2.0.0)"
 dependencies:
 extensions:
-  - jessitron:kats-parser:0.1.0
