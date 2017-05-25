@@ -10,10 +10,12 @@
         "declaration": false,
         "noImplicitAny": false,
         "noImplicitUseStrict": false,
-        "removeComments": true,
+        "removeComments": false,
         "noLib": false,
         "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true
+        "suppressImplicitAnyIndexErrors": true,
+        "outDir": "target/ts-built",
+        "rootDir": "."
     },
     "exclude": [
         "node_modules",
@@ -21,7 +23,7 @@
         "typings/browser.d.ts"
     ],
     "compileOnSave": true,
-    "buildOnSave": false,
+    "buildOnSave": true,
     "atom": {
         "rewriteTsconfig": false
     }
