@@ -12,7 +12,7 @@ project_parent_dir=$(mktemp -d)
 project_name="banana"
 org="jessitron"
 
-$rug_command generate StaticPage $project_name org=$org -lRC $project_parent_dir
+$rug_command generate StaticPage $project_name org=$org -lRC $project_parent_dir -X
 
 project_dir=$project_parent_dir/$project_name
 
