@@ -8,16 +8,6 @@ import { Pattern } from "@atomist/rug/operations/RugOperation";
 class StaticPage implements PopulateProject {
 
     @Parameter({
-        displayName: "Project Name",
-        description: "name of project to be created",
-        pattern: Pattern.project_name,
-        validInput: "a valid GitHub project name consisting of alphanumeric, ., -, and _ characters",
-        minLength: 1,
-        maxLength: 100,
-    })
-    public projectName: string;
-
-    @Parameter({
         displayName: "Organization",
         validInput: "github owner",
         pattern: Pattern.group_id,
@@ -33,11 +23,13 @@ class StaticPage implements PopulateProject {
 
     public populate(project: Project) {
 
-        const repo = "https://github.com/" + this.org + "/" + this.projectName.toLowerCase() + ".git";
-        const linkToGithubPages = "https://" + this.org + ".github.io/" + this.projectName;
+        const projectName = project.name;
+
+        const repo = "https://github.com/" + this.org + "/" + projectName.toLowerCase() + ".git";
+        const linkToGithubPages = "https://" + this.org + ".github.io/" + projectName;
 
         const index = project.findFile("resources/index.html");
-        index.regexpReplace("<title>.*</title>", "<title>" + this.projectName + "</title>");
+        index.regexpReplace("<title>.*</title>", "<title>" + projectName + "</title>");
 
         const eng = project.context.pathExpressionEngine;
 
@@ -50,7 +42,7 @@ class StaticPage implements PopulateProject {
             e.setValue(this.description);
         });
 
-        const newReadmeContent = `# ${this.projectName}
+        const newReadmeContent = `# ${projectName}
 ${this.description}
 
 [See it live](${linkToGithubPages})`;
