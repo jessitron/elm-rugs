@@ -3,7 +3,7 @@
 set -e
 set -x
 
-rug_command="local-rug"
+rug_command="rug"
 
 echo "Running a bunch of rugs in succession"
 echo "This test requires elm installed"
@@ -12,7 +12,7 @@ project_parent_dir=$(mktemp -d)
 project_name="banana"
 org="jessitron"
 
-$rug_command -lRC $project_parent_dir generate StaticPage $project_name org=$org
+$rug_command generate StaticPage $project_name org=$org -lRC $project_parent_dir
 
 project_dir=$project_parent_dir/$project_name
 
