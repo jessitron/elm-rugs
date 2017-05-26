@@ -15,6 +15,10 @@ Then("the hello file says hello", (p: Project, world) => {
 });
 
 
-Given("an empty project", (p: Project, world: ProjectScenarioWorld) => {});
+Given("an empty project", (p: Project, world: ProjectScenarioWorld) => { });
+
+Given("an empty project", (p: Project, world: ProjectScenarioWorld) => { });
+
+Given("an empty project", (p: Project, world: ProjectScenarioWorld) => { });
 
 Given("an empty project", (p: Project, world: ProjectScenarioWorld) => {});

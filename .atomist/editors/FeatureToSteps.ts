@@ -69,7 +69,11 @@ export class FeatureToSteps implements EditProject {
         const givenMatches: any[] = mg.findMatches(featureFileContent);
         const givenSteps = givenMatches.map((g) => g.given_step);
 
-        const newSteps = givenSteps.map((step) => `
+        const existingSteps = this.existingGivenSteps(stepFileContent);
+        console.log("found steps: " + existingSteps.join("\n"));
+        const newSteps = givenSteps.
+            filter((s) => existingSteps.indexOf(s) < 0).
+            map((step) => `
 Given("${step}", (${variety.stepArguments}) => {});
 `);
 
@@ -77,6 +81,15 @@ Given("${step}", (${variety.stepArguments}) => {});
 
         stepFile.setContent(newStepContent);
 
+    }
+
+    private existingGivenSteps(content: string): string[] {
+        const mg = Microgrammar.fromDefinitions("steppers", {
+            given_keyword: "Given(\"",
+            given_step: new Break("\""),
+            ...AnonymousDefinition,
+        });
+        return mg.findMatches(content).map((g: any) => g.given_step);
     }
 }
 
