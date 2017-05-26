@@ -173,3 +173,48 @@ editor:
   parameters:
     - "featureFile": ".atomist/tests/project/FeatureToStepsTest"
 
+---
+kind: "operation"
+client: "rug-cli 1.0.0-m.2"
+editor:
+  name: "FeatureToSteps"
+  group: "jessitron"
+  artifact: "elm-rugs"
+  version: "3.0.0"
+  origin:
+    repo: "git@github.com:jessitron/elm-rugs"
+    branch: "feature-to-steps"
+    sha: "18181c0*"
+  parameters:
+    - "featureFile": ".atomist/tests/project/FeatureToStepsTest"
+
+---
+kind: "operation"
+client: "rug-cli 1.0.0-m.2"
+editor:
+  name: "FeatureToSteps"
+  group: "jessitron"
+  artifact: "elm-rugs"
+  version: "3.0.0"
+  origin:
+    repo: "git@github.com:jessitron/elm-rugs"
+    branch: "feature-to-steps"
+    sha: "1d4a121*"
+  parameters:
+    - "featureFile": ".atomist/tests/project/FeatureToStepsTest"
+
+---
+kind: "operation"
+client: "rug-cli 1.0.0-m.2"
+editor:
+  name: "FeatureToSteps"
+  group: "jessitron"
+  artifact: "elm-rugs"
+  version: "3.0.0"
+  origin:
+    repo: "git@github.com:jessitron/elm-rugs"
+    branch: "feature-to-steps"
+    sha: "a95bae2*"
+  parameters:
+    - "featureFile": ".atomist/tests/project/FeatureToStepsTest"
+

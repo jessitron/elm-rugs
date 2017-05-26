@@ -73,7 +73,7 @@ export class FeatureToSteps implements EditProject {
         const existingSteps = this.existingGivenSteps(project);
         console.log("found steps: " + existingSteps.join("\n"));
         const newSteps = givenSteps.
-            filter((s) => existingSteps.indexOf(s) < 0).
+            filter((s) => notFoundIn(existingSteps, s)).
             map((step) => `
 Given("${step}", (${variety.stepArguments}) => {});
 `);
@@ -111,6 +111,19 @@ Given("${step}", (${variety.stepArguments}) => {});
         const matches = mg.findMatches(content);
         return matches.map((g: any) => g.given_step);
     }
+}
+
+// exported for testing
+export function notFoundIn(existingSteps: string[], thisStep: string): boolean {
+    let matchiness = false;
+    console.log("look at these handsome steps:" + existingSteps.join(","));
+    existingSteps.forEach((s) => {
+        if ((new RegExp("^" + s + "$")).test(thisStep)) {
+            console.log((`woo woo. ${thisStep} is satisfied by ${s}`));
+            matchiness = true;
+        }
+    });
+    return !matchiness;
 }
 
 export const featureToSteps = new FeatureToSteps();
