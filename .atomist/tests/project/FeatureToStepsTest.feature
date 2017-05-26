@@ -1,7 +1,7 @@
-Feature: Make sure the sample TypeScript Editor has some tests
-  This is the sample Gherkin feature file for the BDD tests of
-  the generate the steps for our features.
-  Feel free to modify and extend to suit the needs of your editor.
+Feature: Automate the outline of steps from this feature file
+  These feature files contain steps. It's fine to write them here
+  but then you have to c&p the text of each one into Steps.this
+  and that gets annoying. This editor will do that for you.
 
 
   Scenario: FeatureToSteps should edit a project correctly
