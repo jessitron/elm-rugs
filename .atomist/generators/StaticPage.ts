@@ -25,6 +25,9 @@ class StaticPage implements PopulateProject {
 
         const projectName = project.name;
 
+        // remove files used by editors
+        project.deleteFile("src/BeginnerProgram.elm");
+
         const repo = "https://github.com/" + this.org + "/" + projectName.toLowerCase() + ".git";
         const linkToGithubPages = "https://" + this.org + ".github.io/" + projectName;
 

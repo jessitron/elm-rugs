@@ -1,4 +1,4 @@
-module BeginnerProject exposing (..)
+module BeginnerProgram exposing (..)
 
 import Html exposing (Html)
 
