@@ -4,7 +4,7 @@ import { Result } from "@atomist/rug/test/Result";
 
 const filesInStaticPageProject = [
     "src/Main.elm",
-    "resources/index",
+    "resources/index.html",
     "resources/styles.css",
     "elm-package.json",
     "build",
@@ -22,13 +22,13 @@ When("running the StaticPage generator", (p: Project, world: ProjectScenarioWorl
 });
 
 Then("minimal files are included", (p: Project) => {
-    const filenames = p.files.map((f) => f.filename);
+    const filenames = p.files.map((f) => f.path);
     const result = (
         filesInStaticPageProject.every((f) => p.fileExists(f)) &&
         filenames.length === filesInStaticPageProject.length);
     if (!result) {
         console.log("Expected files: " + filesInStaticPageProject.sort().join(", "));
-        console.log("Found files: " + filenames.sort().join(","));
+        console.log("Found files:    " + filenames.sort().join(", "));
     }
     return result;
 });
