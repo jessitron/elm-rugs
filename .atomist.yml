@@ -66,3 +66,19 @@ editor:
     branch: "894b141b3e1662c99b5ad5d50431389ddb6cddd2"
     sha: "894b141"
 
+---
+kind: "operation"
+client: "rug-cli 1.0.0-m.2"
+editor:
+  name: "AddTypeScriptEditor"
+  group: "atomist"
+  artifact: "rug-rugs"
+  version: "0.31.0-20170524133032"
+  origin:
+    repo: "https://github.com/atomist/rug-rugs.git"
+    branch: "894b141b3e1662c99b5ad5d50431389ddb6cddd2"
+    sha: "894b141"
+  parameters:
+    - "editorName": "UpgradeToBeginnerProgram"
+    - "description": "Turn a static page into an interactive page"
+
