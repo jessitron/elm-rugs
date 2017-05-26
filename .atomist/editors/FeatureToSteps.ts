@@ -1,7 +1,8 @@
-import { Project } from "@atomist/rug/model/Project";
+import { File, Project } from "@atomist/rug/model/Core";
 import { Editor, Parameter, Tags } from "@atomist/rug/operations/Decorators";
 import { EditProject } from "@atomist/rug/operations/ProjectEditor";
 import { Pattern } from "@atomist/rug/operations/RugOperation";
+import { PathExpressionEngine } from "@atomist/rug/tree/PathExpression";
 
 import { Microgrammar } from "../microgrammar/Microgrammar";
 import { AnonymousDefinition, PatternMatch, Term } from "../microgrammar/PatternMatch";
@@ -69,7 +70,7 @@ export class FeatureToSteps implements EditProject {
         const givenMatches: any[] = mg.findMatches(featureFileContent);
         const givenSteps = givenMatches.map((g) => g.given_step);
 
-        const existingSteps = this.existingGivenSteps(stepFileContent);
+        const existingSteps = this.existingGivenSteps(project);
         console.log("found steps: " + existingSteps.join("\n"));
         const newSteps = givenSteps.
             filter((s) => existingSteps.indexOf(s) < 0).
@@ -83,13 +84,24 @@ Given("${step}", (${variety.stepArguments}) => {});
 
     }
 
-    private existingGivenSteps(content: string): string[] {
-        const mg = Microgrammar.fromDefinitions("steppers", {
-            given_keyword: "Given(\"",
-            given_step: new Break("\""),
-            ...AnonymousDefinition,
-        });
-        return mg.findMatches(content).map((g: any) => g.given_step);
+    private existingGivenSteps(project: Project): string[] {
+
+        const pxe = project.context.pathExpressionEngine;
+        let recognizedSteps: string[] = [];
+        pxe.with<File>(project, "/*[@name='.atomist']/tests//File()",
+            (file) => {
+                if (file.name.match(/\.ts$/)) {
+                    const mg = Microgrammar.fromDefinitions("steppers", {
+                        given_keyword: "Given(\"",
+                        given_step: new Break("\""),
+                        ...AnonymousDefinition,
+                    });
+                    const matches = mg.findMatches(file.content);
+                    console.log(`Found ${matches.length} matches in ${file.path}`);
+                    recognizedSteps = recognizedSteps.concat(matches.map((g: any) => g.given_step));
+                }
+            });
+        return recognizedSteps;
     }
 }
 
