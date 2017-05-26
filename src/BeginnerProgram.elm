@@ -7,12 +7,12 @@ import Html exposing (Html)
 
 
 type alias Model =
-    String
+    {}
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( "Hello", Cmd.none )
+    ( {}, Cmd.none )
 
 
 
@@ -30,7 +30,7 @@ type Msg
 view : Model -> Html Msg
 view model =
     Html.div []
-        [ Html.text model ]
+        []
 
 
 
