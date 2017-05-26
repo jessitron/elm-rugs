@@ -16,7 +16,7 @@ $rug_command generate StaticPage $project_name org=$org -lRC $project_parent_dir
 
 project_dir=$project_parent_dir/$project_name
 
-#rug -lRC $project_dir edit UpgradeToBeginnerProgram
+# rug edit UpgradeToBeginnerProgram -lRC $project_dir
 #rug -lRC $project_dir edit AddButton button_text="Hello There" button_message=HelloThere
 #rug -lRC $project_dir edit AddTextInput input_name=beginnerInput
 #rug -lRC $project_dir edit UpgradeToProgram
