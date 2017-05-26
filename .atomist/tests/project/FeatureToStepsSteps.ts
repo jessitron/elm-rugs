@@ -3,15 +3,10 @@ import {
     Given, ProjectScenarioWorld, Then, When,
 } from "@atomist/rug/test/project/Core";
 
-When("the FeatureToSteps is run", (p: Project, world) => {
-    const w = world as ProjectScenarioWorld;
-    const editor = w.editor("FeatureToSteps");
-    w.editWith(editor, { inputParameter: "the inputParameter value" });
-});
+Given("a project with a feature file", (p: Project, world: ProjectScenarioWorld) => {});
 
-Then("the hello file says hello", (p: Project, world) => {
-    const w = world as ProjectScenarioWorld;
-    return p.fileContains("hello.txt", "Hello, World!");
-});
+Given("some of the steps are defined", (p: Project, world: ProjectScenarioWorld) => {});
 
-Given("bana-na handler", (p: Project, world: ProjectScenarioWorld) => {});
+When("the FeatureToSteps editor is run", (p: Project, world: ProjectScenarioWorld) => {});
+
+Then("all the steps are defined", (p: Project, world: ProjectScenarioWorld) => {});
