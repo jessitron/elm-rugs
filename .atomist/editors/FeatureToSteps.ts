@@ -91,17 +91,25 @@ Given("${step}", (${variety.stepArguments}) => {});
         pxe.with<File>(project, "/*[@name='.atomist']/tests//File()",
             (file) => {
                 if (file.name.match(/\.ts$/)) {
-                    const mg = Microgrammar.fromDefinitions("steppers", {
-                        given_keyword: "Given(\"",
-                        given_step: new Break("\""),
-                        ...AnonymousDefinition,
-                    });
-                    const matches = mg.findMatches(file.content);
-                    console.log(`Found ${matches.length} matches in ${file.path}`);
-                    recognizedSteps = recognizedSteps.concat(matches.map((g: any) => g.given_step));
+                    recognizedSteps = recognizedSteps.concat(this.recognizeSteps(file.content));
                 }
             });
+
+        pxe.with<File>(project, "//WellKnownSteps.ts",
+            (file) => {
+                recognizedSteps = recognizedSteps.concat(this.recognizeSteps(file.content));
+            });
         return recognizedSteps;
+    }
+
+    private recognizeSteps(content: string) {
+        const mg = Microgrammar.fromDefinitions("steppers", {
+            given_keyword: "Given(\"",
+            given_step: new Break("\""),
+            ...AnonymousDefinition,
+        });
+        const matches = mg.findMatches(content);
+        return matches.map((g: any) => g.given_step);
     }
 }
 

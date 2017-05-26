@@ -13,9 +13,6 @@ const filesInStaticPageProject = [
     "README.md",
 ];
 
-// tslint:disable-next-line:no-empty
-Given("an empty project", (p) => { });
-
 When("running the StaticPage generator", (p: Project, world: ProjectScenarioWorld) => {
     const generator = world.generator("StaticPage");
     world.generateWith(generator, "banana", { org: "jessitron" });

@@ -13,3 +13,5 @@ Then("the hello file says hello", (p: Project, world) => {
     const w = world as ProjectScenarioWorld;
     return p.fileContains("hello.txt", "Hello, World!");
 });
+
+Given("an empty banana", (p: Project, world: ProjectScenarioWorld) => {});
