@@ -1,6 +1,6 @@
 module BeginnerProject exposing (..)
 
-import Html exposing (Html, div, text, program)
+import Html exposing (Html)
 
 
 -- MODEL
@@ -29,8 +29,8 @@ type Msg
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ text model ]
+    Html.div []
+        [ Html.text model ]
 
 
 
@@ -59,7 +59,7 @@ subscriptions model =
 
 main : Program Never Model Msg
 main =
-    program
+    Html.program
         { init = init
         , view = view
         , update = update
