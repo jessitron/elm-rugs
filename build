@@ -10,4 +10,4 @@ echo "Copying resources..."
 cp -r resources/* target
 
 echo "Compiling..."
-elm make --debug --output target/elm.js $* src/Main.elm
+elm make --debug --output target/elm.js $* src/*.elm
