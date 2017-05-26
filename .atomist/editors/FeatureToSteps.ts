@@ -115,15 +115,7 @@ Given("${step}", (${variety.stepArguments}) => {});
 
 // exported for testing
 export function notFoundIn(existingSteps: string[], thisStep: string): boolean {
-    let matchiness = false;
-    console.log("look at these handsome steps:" + existingSteps.join(","));
-    existingSteps.forEach((s) => {
-        if ((new RegExp("^" + s + "$")).test(thisStep)) {
-            console.log((`woo woo. ${thisStep} is satisfied by ${s}`));
-            matchiness = true;
-        }
-    });
-    return !matchiness;
+    return existingSteps.every((s) => !(new RegExp("^" + s + "$")).test(thisStep));
 }
 
 export const featureToSteps = new FeatureToSteps();

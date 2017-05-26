@@ -5,7 +5,7 @@ Feature: Make sure the sample TypeScript Editor has some tests
 
 
   Scenario: FeatureToSteps should edit a project correctly
-    Given bana-na handler
+    Given banana handler
     When the FeatureToSteps is run
     Then parameters were valid
     Then changes were made
