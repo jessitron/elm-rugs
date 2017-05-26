@@ -17,22 +17,26 @@
 import "mocha";
 import assert = require("power-assert");
 
-import { notFoundIn } from "../editors/FeatureToSteps";
+import { whereIsItFound } from "../editors/FeatureToSteps";
 
 describe("Feature To Steps magic code editor", () => {
 
+    const existingSteps = ["some stuff", "(more) stuff", "([a-zA-Z0-9]+) handler"].map((s) => {
+        return {
+            step: s, filename: "file",
+        };
+    });
+
     it("should recognize a step among existing steps", () => {
         const yesStep = "banana handler";
-        const existingSteps = ["some stuff", "(more) stuff", "([a-zA-Z0-9]+) handler"];
 
-        assert(!notFoundIn(existingSteps, yesStep));
+        assert(whereIsItFound(existingSteps, yesStep).filename === "file");
     });
 
     it("should not recognize a new step", () => {
         const notStep = "bana-na handler";
-        const existingSteps = ["some stuff", "(more) stuff", "([a-zA-Z0-9]+) handler"];
 
-        assert(notFoundIn(existingSteps, notStep));
+        assert(!whereIsItFound(existingSteps, notStep));
     });
 
     it("should like do this regex thing", () => {
