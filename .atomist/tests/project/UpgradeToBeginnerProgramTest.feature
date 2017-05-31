@@ -6,7 +6,6 @@ Feature: Make sure the sample TypeScript Editor has some tests
 
   Scenario: UpgradeToBeginnerProgram should edit a project correctly
     Given an empty project
+    When running the StaticPage generator
     When the UpgradeToBeginnerProgram is run
-    Then parameters were valid
-    Then changes were made
-    Then the hello file says hello
+    Then the type of main is Program Never Model Msg

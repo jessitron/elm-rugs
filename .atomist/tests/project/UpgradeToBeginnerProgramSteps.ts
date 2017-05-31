@@ -9,7 +9,10 @@ When("the UpgradeToBeginnerProgram is run", (p: Project, world) => {
     w.editWith(editor, { inputParameter: "the inputParameter value" });
 });
 
-Then("the hello file says hello", (p: Project, world) => {
-    const w = world as ProjectScenarioWorld;
-    return p.fileContains("hello.txt", "Hello, World!");
+Then("the type of main is (.*)", (p: Project, world: ProjectScenarioWorld, desiredType: string) => {
+    const mainElm = p.findFile("src/Main.elm").content;
+
+    const m = mainElm.match(/^main : (.*)$/m);
+    const mainFunctionType = m[1];
+    return (mainFunctionType === desiredType);
 });
