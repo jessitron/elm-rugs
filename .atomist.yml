@@ -355,4 +355,23 @@ editor:
   parameters:
     - "featureFile": ".atomist/tests/project/UpgradeToBeginnerProgramTest"
 
+<<<<<<< HEAD
 >>>>>>> bcf0506... treat same level as a move left
+=======
+---
+kind: "operation"
+client: "rug-cli 1.0.0-m.2"
+editor:
+  name: "AddTypeScriptEditor"
+  group: "atomist"
+  artifact: "rug-rugs"
+  version: "0.31.0-20170530183725"
+  origin:
+    repo: "https://github.com/atomist/rug-rugs.git"
+    branch: "15a7feb96bfe7aa261790e8b7fa3d79b79014c3b"
+    sha: "15a7feb"
+  parameters:
+    - "editorName": "ChangeMain"
+    - "description": "Change the body of the main function"
+
+>>>>>>> 720347f... Adds a TypeScript Rug editor to a Rug project
