@@ -24,40 +24,46 @@ export class UpgradeToBeginnerProgram implements EditProject {
             return;
         }
 
+        function descend(from: TextTreeNode, path: string): TextTreeNode {
+            try {
+                return pxe.scalar<TextTreeNode, TextTreeNode>(from, path);
+            } catch (e) {
+                console.log("the children are: " + from.children().map((n) => n.nodeName() + (n as any).sectionHeader.value()).join(","));
+                throw e;
+            }
+        }
+
+        // the stuff we need from the existing program
+        const existingModuleBody = descend(basicMainTreeNode, "/moduleBody");
+        const existingMain = descend(existingModuleBody, "//functionDeclaration[@functionName='main']");
+        const everythingButMain: string = existingModuleBody.value().replace(existingMain.value(), "");
+        // TODO: could remove some whitespace too
+
         // bring the code we need in to the project so we can parse it
         project.copyEditorBackingFileOrFailToDestination("src/BeginnerProgram.elm", "deleteme/BeginnerProgram.elm");
-        const beginnerProgramTreeNode = pxe.scalar(project, "/deleteme/BeginnerProgram.elm/Elm()");
+        const beginnerProgramTreeNode =
+            pxe.scalar<Project, TextTreeNode>(project, "/deleteme/BeginnerProgram.elm/Elm()");
 
         // TODO: imports.
-        const existingImports = pxe.evaluate<TextTreeNode, TextTreeNode>(basicMainTreeNode, "//import").matches;
-        if (existingImports.length < 1) {
-            throw new Error("Did not detect import section in Main.elm");
-        }
-        const lastImport = existingImports[existingImports.length - 1];
 
-        let state = "before-imports";
-        let stuffToAdd = "";
-        pxe.with<TextTreeNode>(beginnerProgramTreeNode, "/*",
-            (topLevel) => {
-                console.log(`> Looking at: ${topLevel.nodeName()}`)
-                if (state === "before-imports") {
-                    if (topLevel.nodeName() === "import") {
-                        console.log("> detected an import");
-                        state = "in-imports";
-                    }
-                } else if (state === "in-imports") {
-                    if (topLevel.nodeName() !== "import") {
-                        console.log("> past impoert ");
-                        state = "inserting-things";
-                    }
-                } else if (state === "inserting-things") {
-                    console.log(`> inserting: ${topLevel.value()}`);
-                    stuffToAdd = stuffToAdd + "\n\n" + topLevel.value();
-                }
-            }
-        );
+        const beginnerProgramModuleBody =
+            descend(beginnerProgramTreeNode, "/moduleBody");
+        const viewSection =
+            beginnerProgramModuleBody.children().
+                map(t => t as TextTreeNode).
+                filter(ttn => ttn.nodeName() === "section").
+                map(a => a as any).
+                filter(a => {
+                    console.log(`found a section with value <${a.sectionHeader.value()}>`);
+                    return a.sectionHeader.value() === "VIEW";
+                })[0];
+        console.log("found view section: " + viewSection)
+        descend(beginnerProgramModuleBody, "/section[/sectionHeader[@value='VIEW']]");
+        const viewFunctionBody = descend(viewSection, "/functionDeclaration[@functionName='view']/body");
+        viewFunctionBody.update((existingMain as any).body);
+        viewSection.update(viewSection.value() + everythingButMain);
 
-        lastImport.update(lastImport.value() + stuffToAdd);
+        existingModuleBody.update(beginnerProgramModuleBody.value());
 
         console.log("Here is the file yo");
         console.log(basicMainTreeNode.value().replace(/^$/mg, "[blank]"));
