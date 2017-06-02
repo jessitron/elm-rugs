@@ -63,8 +63,8 @@ export class UpgradeToBeginnerProgram implements EditProject {
                 existingModuleBody.update(beginnerProgramBody.value()),
         );
 
-        console.log("Here is the file yo");
-        console.log(basicMainTreeNode.value().replace(/^$/mg, "[blank]"));
+        // console.log("Here is the file yo");
+        // console.log(basicMainTreeNode.value().replace(/^$/mg, "[blank]"));
 
         project.deleteFile("deleteme/BeginnerProgram.elm");
 
