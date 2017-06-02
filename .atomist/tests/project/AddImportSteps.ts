@@ -3,7 +3,7 @@ import {
     Given, ProjectScenarioWorld, Then, When,
 } from "@atomist/rug/test/project/Core";
 
-const CERTAIN_INPUT_FILEPATH = "hello.txt";
+const CERTAIN_INPUT_FILEPATH = "src/Main.elm";
 
 const CERTAIN_FILE_CONTENT_BEFORE = `module Main exposing (main)
 
@@ -41,7 +41,10 @@ Then("the file has the import", (p: Project, world) => {
     const after = p.findFile(CERTAIN_INPUT_FILEPATH).content;
     const passing = (after === CERTAIN_FILE_CONTENT_AFTER);
     if (!passing) {
-        console.log(`FAILURE: ${CERTAIN_INPUT_FILEPATH} --->\n${after}\n<---`);
+        console.log(
+            `FAILURE: ${CERTAIN_INPUT_FILEPATH} --->\n${
+            after.replace(/^$/mg, "[blank line]")
+            }\n<---`);
     }
     return passing;
 });

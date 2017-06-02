@@ -18,7 +18,6 @@ export class UpgradeToBeginnerProgram implements EditProject {
         const basicMainTreeNode = pxe.scalar<Project, TextTreeNode>(project, "/src/Main.elm/Elm()");
         const typeOfMain = pxe.scalar<TextTreeNode, TextTreeNode>(basicMainTreeNode,
             "//typeDeclaration[@functionName='main']/declaredType/typeReference/typeName");
-        console.log("Type of main is: \n" + drawTree(typeOfMain));
         if (typeOfMain.value() === "Program") {
             // nothing to do here, it's already a Program
             return;
