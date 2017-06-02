@@ -1,3 +1,4 @@
 target
 elm-stuff
 node_modules
+.atomist.yml
