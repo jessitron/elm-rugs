@@ -12,14 +12,14 @@ import * as TreeHelper from "@atomist/rug/tree/TreeHelper";
 export class Play implements EditProject {
 
     public edit(project: Project) {
-        const positionOfInterest: Position = { line: 32, column: 5 };
-        const endPositionOfInterest: Position = { line: 33, column: 11 };
+        const positionOfInterest: Position = { line: 8, column: 5 };
+        const endPositionOfInterest: Position = { line: 8, column: 18 };
 
-        const identifierPosition: Position = { line: 32, column: 11 };
+        const identifierPosition: Position = { line: 8, column: 5 };
 
         const grammarPX = "/Elm()";
 
-        const filepathOfInterest = "src/BeginnerProgram.elm";
+        const filepathOfInterest = "src/Main.elm";
         const fileOfInterest = project.findFile(filepathOfInterest);
         if (fileOfInterest == null) {
             throw new Error(`File not found: ${filepathOfInterest}`);
