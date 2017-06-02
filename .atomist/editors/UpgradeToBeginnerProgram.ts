@@ -41,34 +41,32 @@ export class UpgradeToBeginnerProgram implements EditProject {
 
         // bring the code we need in to the project so we can parse it
         project.copyEditorBackingFileOrFailToDestination("src/BeginnerProgram.elm", "deleteme/BeginnerProgram.elm");
-        const beginnerProgramTreeNode =
-            pxe.scalar<Project, TextTreeNode>(project, "/deleteme/BeginnerProgram.elm/Elm()");
 
         // TODO: imports.
 
-        const beginnerProgramModuleBody =
-            descend(beginnerProgramTreeNode, "/moduleBody");
-        const viewSection =
-            beginnerProgramModuleBody.children().
-                map(t => t as TextTreeNode).
-                filter(ttn => ttn.nodeName() === "section").
-                map(a => a as any).
-                filter(a => {
-                    console.log(`found a section with value <${a.sectionHeader.value()}>`);
-                    return a.sectionHeader.value() === "VIEW";
-                })[0];
-        console.log("found view section: " + viewSection)
-        descend(beginnerProgramModuleBody, "/section[/sectionHeader[@value='VIEW']]");
-        const viewFunctionBody = descend(viewSection, "/functionDeclaration[@functionName='view']/body");
-        viewFunctionBody.update((existingMain as any).body);
-        viewSection.update(viewSection.value() + everythingButMain);
+        const mainBodyText = (existingMain as any).body.value();
+        // update the view function to contain the body of Main.main
 
-        existingModuleBody.update(beginnerProgramModuleBody.value());
+        pxe.with<TextTreeNode>(project,
+            "/deleteme/BeginnerProgram.elm/Elm()//functionDeclaration[@functionName='view']/body",
+            (body) => body.update(mainBodyText));
+
+        // add the rest of Main.elm to the view section
+        pxe.with<TextTreeNode>(project,
+            "/deleteme/BeginnerProgram.elm/Elm()/moduleBody/section[@sectionHeader='VIEW']",
+            (section) => section.update(section.value() + everythingButMain),
+        );
+
+        pxe.with<TextTreeNode>(project,
+            "/deleteme/BeginnerProgram.elm/Elm()/moduleBody",
+            (beginnerProgramBody) =>
+                existingModuleBody.update(beginnerProgramBody.value()),
+        );
 
         console.log("Here is the file yo");
         console.log(basicMainTreeNode.value().replace(/^$/mg, "[blank]"));
 
-        throw new Error("not done yet");
+        project.deleteFile("deleteme/BeginnerProgram.elm");
 
     }
 }
