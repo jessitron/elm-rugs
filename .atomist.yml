@@ -375,3 +375,20 @@ editor:
     - "description": "Change the body of the main function"
 
 >>>>>>> 720347f... Adds a TypeScript Rug editor to a Rug project
+---
+kind: "operation"
+client: "com.atomist:rug"
+version: "1.0.1-LANGEXT"
+editor:
+  name: "AddTypeScriptEditor"
+  group: "atomist"
+  artifact: "rug-rugs"
+  version: "0.31.0-20170601202105"
+  origin:
+    repo: "https://github.com/atomist/rug-rugs.git"
+    branch: "d1145f3450f22af598a278ccc475eb18f3c0f5e4"
+    sha: "d1145f3"
+  parameters:
+    - "editorName": "AddImport"
+    - "description": "add an import"
+
