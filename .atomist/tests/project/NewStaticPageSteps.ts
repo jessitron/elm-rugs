@@ -10,6 +10,7 @@ const filesInStaticPageProject = [
     "build",
     "release",
     ".gitignore",
+    ".gitattributes",
     "README.md",
 ];
 
