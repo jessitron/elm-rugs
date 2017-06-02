@@ -17,7 +17,7 @@ $rug_command generate StaticPage $project_name org=$org -lRC $project_parent_dir
 project_dir=$project_parent_dir/$project_name
 
 rug edit AddImport import="Html.Attributes" -lRC $project_dir -X
-rug edit ChangeMain newBody="Html.main_ [] [ Html.canvas [ Html.Attributes.style [] ] [] ]" -lRC $project_dir -X
+rug edit ChangeMain newBody="Html.main_ [] [ Html.canvas [ Html.Attributes.style [ ( \"backgroundImage\", \"url(\" ++ diagram ++ \")\" ) ] ] [] ]" -lRC $project_dir -X
 rug edit UpgradeToBeginnerProgram -lRC $project_dir
 #rug -lRC $project_dir edit AddButton button_text="Hello There" button_message=HelloThere
 #rug -lRC $project_dir edit AddTextInput input_name=beginnerInput

@@ -17,7 +17,6 @@ export class ChangeMain implements EditProject {
         pattern: Pattern.any,
         validInput: "an Elm expression returning Html.Html",
         minLength: 1,
-        maxLength: 100,
     })
     public newBody: string;
 
