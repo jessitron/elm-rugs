@@ -5,27 +5,38 @@ import {
 
 const CERTAIN_INPUT_FILEPATH = "hello.txt";
 
-const CERTAIN_FILE_CONTENT_BEFORE = `I love to say hello
+const CERTAIN_FILE_CONTENT_BEFORE = `module Main exposing (main)
 
-to the world
+import Html exposing (Html)
+
+
+main : Html Never
+main =
+    Html.div [] []
 `;
 
-const CERTAIN_FILE_CONTENT_AFTER = `I love to say hello
+const CERTAIN_FILE_CONTENT_AFTER = `module Main exposing (main)
 
-to you
+import Html exposing (Html)
+import Html.Attributes
+
+
+main : Html Never
+main =
+    Html.div [] []
 `;
 
-Given("a project with a certain file", (p: Project, world) => {
+Given("a project with an elm file", (p: Project, world) => {
     p.addFile(CERTAIN_INPUT_FILEPATH, CERTAIN_FILE_CONTENT_BEFORE);
 });
 
 When("the AddImport is run", (p: Project, world) => {
     const w = world as ProjectScenarioWorld;
     const editor = w.editor("AddImport");
-    w.editWith(editor, { inputParameter: "you" });
+    w.editWith(editor, { import: "Html.Attributes" });
 });
 
-Then("that certain file looks different", (p: Project, world) => {
+Then("the file has the import", (p: Project, world) => {
     const w = world as ProjectScenarioWorld;
     const after = p.findFile(CERTAIN_INPUT_FILEPATH).content;
     const passing = (after === CERTAIN_FILE_CONTENT_AFTER);
