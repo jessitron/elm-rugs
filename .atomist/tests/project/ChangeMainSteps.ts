@@ -46,7 +46,7 @@ Then("that certain file looks different", (p: Project, world) => {
     if (!passing) {
         console.log(
             `FAILURE: ${CERTAIN_INPUT_FILEPATH} --->\n${
-            after.replace(/^$/mg, "[blank line]\n")
+            after.replace(/^$/mg, "[blank line]")
             }\n<---`);
     }
     return passing;

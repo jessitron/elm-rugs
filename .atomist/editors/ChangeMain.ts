@@ -30,6 +30,12 @@ export class ChangeMain implements EditProject {
             (mainBody) => {
                 mainBody.update(this.newBody);
             });
+        this.trailingNewline(project.findFile("src/Main.elm"));
+    }
+
+    private trailingNewline(f: File) {
+        const content = f.content;
+        if (!f.content.match(/\n$/)) { f.setContent(content + "\n"); }
     }
 }
 
