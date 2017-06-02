@@ -8,7 +8,7 @@ import { TextTreeNode } from "@atomist/rug/tree/PathExpression";
  * Sample TypeScript editor used by AddChangeMain.
  */
 @Editor("ChangeMain", "Change the body of the main function")
-@Tags("documentation")
+@Tags("elm")
 export class ChangeMain implements EditProject {
 
     @Parameter({
@@ -24,7 +24,7 @@ export class ChangeMain implements EditProject {
     public edit(project: Project) {
         project.context.pathExpressionEngine.with<TextTreeNode>(project,
             `/src/Main.elm/Elm()//functionDeclaration
-                     [/functionName[@value='main']]
+                     [@functionName='main']
                      /body`
             ,
             (mainBody) => {
