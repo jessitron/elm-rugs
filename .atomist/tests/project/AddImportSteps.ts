@@ -26,7 +26,7 @@ main =
     Html.div [] []
 `;
 
-Given("a project with an elm file", (p: Project, world) => {
+Given("a project with an Elm program", (p: Project, world) => {
     p.addFile(CERTAIN_INPUT_FILEPATH, CERTAIN_FILE_CONTENT_BEFORE);
 });
 

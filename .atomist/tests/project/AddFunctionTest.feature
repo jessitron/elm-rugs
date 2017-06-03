@@ -5,8 +5,8 @@ Feature: Make sure the sample TypeScript Editor has some tests
 
 
   Scenario: AddFunction should edit a project correctly
-    Given a project with a certain file
+    Given a project with an Elm program
     When the AddFunction is run
     Then parameters were valid
     Then changes were made
-    Then that certain file looks different
+    Then the Elm program has the new function

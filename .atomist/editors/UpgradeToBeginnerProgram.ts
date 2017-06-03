@@ -35,6 +35,7 @@ export class UpgradeToBeginnerProgram implements EditProject {
         // the stuff we need from the existing program
         const existingModuleBody = descend(basicMainTreeNode, "/moduleBody");
         const existingMain = descend(existingModuleBody, "//functionDeclaration[@functionName='main']");
+        const fullTypeOfMain: string = (existingMain as any).typeDeclaration.declaredType.value();
         const everythingButMain: string = existingModuleBody.value().replace(existingMain.value(), "");
         // TODO: could remove some whitespace too
 
@@ -58,8 +59,14 @@ export class UpgradeToBeginnerProgram implements EditProject {
 
         pxe.with<TextTreeNode>(project,
             "/deleteme/BeginnerProgram.elm/Elm()/moduleBody",
-            (beginnerProgramBody) =>
-                existingModuleBody.update(beginnerProgramBody.value()),
+            (beginnerProgramBody) => {
+                // anything that used to return Html Never or whatever the original
+                // main was returning, now that should return Html Msg.
+                const adjustedBeginnerProgramBody =
+                    beginnerProgramBody.value().
+                        replace(new RegExp(fullTypeOfMain, "g"), "Html Msg");
+                existingModuleBody.update(adjustedBeginnerProgramBody);
+            }
         );
 
         // console.log("Here is the file yo");

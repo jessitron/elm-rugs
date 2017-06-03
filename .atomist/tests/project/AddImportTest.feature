@@ -5,7 +5,7 @@ Feature: Make sure the sample TypeScript Editor has some tests
 
 
   Scenario: AddImport should edit a project correctly
-    Given a project with an elm file
+    Given a project with an Elm program
     When the AddImport is run
     Then parameters were valid
     Then changes were made
